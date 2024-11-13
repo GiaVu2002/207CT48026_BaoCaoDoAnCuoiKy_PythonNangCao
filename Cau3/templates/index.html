@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách người nhập</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h1 class="mt-5">Danh sách thông tin người nhập</h1>
+        <a href="/add" class="btn btn-primary mb-3">Thêm người nhập</a>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Họ và Tên</th>
+                    <th>Tuổi</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                    <th>Quê quán</th>
+                    <th>Nghề nghiệp</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in data_list %}
+                <tr>
+                    <td>{{ person.full_name }}</td>
+                    <td>{{ person.age }}</td>
+                    <td>{{ person.birth_date }}</td>
+                    <td>{{ person.gender }}</td>
+                    <td>{{ person.address }}</td>
+                    <td>{{ person.hometown }}</td>
+                    <td>{{ person.job }}</td>
+                    <td>
+                        <a href="{{ url_for('edit', id=person.id) }}" class="btn btn-warning btn-sm">Chỉnh sửa</a>
+                        <form action="{{ url_for('delete', id=person.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có muốn xóa thông tin người nhập?')">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
